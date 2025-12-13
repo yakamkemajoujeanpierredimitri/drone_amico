@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@theme {
+  /* Define the custom animation name and duration here */
+  --animate-fade-in: fade-in 1.5s ease-out forwards;
+  --animate-ken-burns: ken-burns 4s ease-out forwards;
+
+  /* Define the keyframes */
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
