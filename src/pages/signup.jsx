@@ -5,7 +5,7 @@ import { useAuth } from '../context/user.context';
 import { useNavigate, Link ,useSearchParams} from 'react-router-dom';
 
 const SignUp = () => {
-    const { dispatch } = useAuth();
+    const { dispatch, Register } = useAuth();
     const [searchParams ,setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [error, setError] = useState(searchParams.get('error')|| null);
@@ -44,8 +44,8 @@ const SignUp = () => {
                 >
                     &times;
                 </button>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-2">Welcome Back!</h2>
-                <p className="text-center text-gray-600 mb-8">Sign in to continue to your account.</p>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-2">Benvenuto</h2>
+                <p className="text-center text-gray-600 mb-8">Crea un account.</p>
                 
                 {error && <p className="text-red-600 bg-red-100 border border-red-200 p-3 rounded-md text-center mb-4">{error}</p>}
 
@@ -63,15 +63,15 @@ const SignUp = () => {
             dispatch({ type: "ERROR", payload: res.error });
         } else {
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-            navigate('/');
+            navigate('/dashboard');
         }
         setLoading(false);
     }}
-                    submitLabel={loading ? 'Signing In...' : 'Sign In'}
+                    submitLabel={loading ? 'Signing up...' : 'Sign Up'}
                     initialValues={initialvalues}
                 />
                 <p className="mt-6 text-center text-gray-600">
-                    Don't have an account? <Link to="/login" className="text-blue-600 hover:text-blue-800 font-medium">Login</Link>
+                    Ho un account? <Link to="/login" className="text-blue-600 hover:text-blue-800 font-medium">Login</Link>
                 </p>
               
             </div>

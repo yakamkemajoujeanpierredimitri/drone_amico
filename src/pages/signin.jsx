@@ -5,14 +5,15 @@ import { useAuth } from '../context/user.context';
 import { useNavigate, Link ,useSearchParams} from 'react-router-dom';
 
 const SignIn = () => {
-    const { dispatch } = useAuth();
+    const { dispatch ,Login} = useAuth();
     const [searchParams ,setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [error, setError] = useState(searchParams.get('error')|| null);
     const [loading, setLoading] = useState(false);
 
     const initialvalues = {
-        email: ''
+        email: '',
+        password:''
     }
     const signInFields = [
         {
@@ -22,7 +23,15 @@ const SignIn = () => {
             placeholder: '',
             required: true,
             
-        }
+        },
+           {
+            name: 'password',
+            label: 'Password',
+            type: 'password',
+            placeholder: '',
+            required: true,
+            
+        }, 
     ];
 
 
@@ -36,8 +45,8 @@ const SignIn = () => {
                 >
                     &times;
                 </button>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-2">Welcome Back!</h2>
-                <p className="text-center text-gray-600 mb-8">Sign in to continue to your account.</p>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-2">Benetornato</h2>
+                <p className="text-center text-gray-600 mb-8">Via.</p>
                 
                 {error && <p className="text-red-600 bg-red-100 border border-red-200 p-3 rounded-md text-center mb-4">{error}</p>}
 
@@ -55,7 +64,7 @@ const SignIn = () => {
             dispatch({ type: "ERROR", payload: res.error });
         } else {
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-            navigate('/');
+            navigate('/dashboard');
         }
         setLoading(false);
     }}
@@ -63,7 +72,7 @@ const SignIn = () => {
                     initialValues={initialvalues}
                 />
                 <p className="mt-6 text-center text-gray-600">
-                    Don't have an account? <Link to="/signup" className="text-blue-600 hover:text-blue-800 font-medium">Sign Up</Link>
+                    Non ho un account ? <Link to="/signup" className="text-blue-600 hover:text-blue-800 font-medium">Sign Up</Link>
                 </p>
               
             </div>
