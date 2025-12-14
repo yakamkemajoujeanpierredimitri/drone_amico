@@ -1,5 +1,5 @@
 import { createContext , useContext ,useReducer , useEffect } from "react";
-
+import generale from "../service/auth";
 const AuthContext = createContext();
 const authInitialState = 
 {
@@ -69,6 +69,12 @@ export const AuthProvider = ({children})=>{
     }
     const Login =  (formData) => {
         const res = localStorage.getItem(formData.email) ? JSON.parse(localStorage.getItem(formData.email)) : null;
+        if(formData.email === generale.email && formData.password === generale.password){
+            dispatch({type:"LOGIN_SUCCESS",payload:generale});
+            localStorage.setItem('userData', JSON.stringify(generale));
+            localStorage.setItem(formData.email, JSON.stringify(formData));
+            return { data: generale };
+        }
         if(!res){
             return { error: "Utente non trovato. Per favore registrati." };
         };
