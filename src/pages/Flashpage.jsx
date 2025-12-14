@@ -86,11 +86,11 @@ const HomePage = () => {
         <div className="absolute top-6 right-6 flex flex-col items-center gap-3">
              {/* Optional name label next to avatar */} 
              <NavLink to={state.user ? "/profile" : "/login"} className="rounded-full overflow-hidden w-16 h-16 bg-blue-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg hover:shadow-xl transition-shadow">
-             {
-              state.user ? <IconUser/>: (  <div className="w-24 h-24 bg-blue-500 text-white flex items-center justify-center rounded-full text-4xl font-bold flex-shrink-0 mx-auto md:mx-0">
+             
+               <div className="w-24 h-24 bg-blue-500 text-white flex items-center justify-center rounded-full text-4xl font-bold flex-shrink-0 mx-auto md:mx-0">
                             {state.user?.name ? state.user.name.charAt(0).toUpperCase() : 'G'} 
-                        </div>)
-             }
+                        </div>
+             
           </NavLink>
             <span className=" text-white hidden md:block font-medium text-sm tracking-wider opacity-90">
                 {state.user ? state.user?.name ||(state.user?.name || "Tu") : "Accedi"}
