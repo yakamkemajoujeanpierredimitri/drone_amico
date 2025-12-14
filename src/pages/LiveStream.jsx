@@ -61,8 +61,8 @@ const LiveStream = () => {
                             </div>
                         </div>
                         
-                        <button onClick={showStopModal} className="w-50 flex  flex-col items-center justify-center gap-0.5 py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 transition-all duration-200 rounded-xl font-semibold text-xs text-white shadow-lg hover:shadow-red-500/30 transform active:scale-98">
-                            <IconStop className="w-2 h-2" />
+                        <button onClick={showStopModal} className="max-w-[200px] max-h-[200px]  flex  flex-col items-center justify-center gap-0.5 py-1 px-2 bg-red-500 hover:bg-red-600 active:bg-red-700 transition-all duration-200 rounded-xl font-semibold text-xs text-white shadow-lg hover:shadow-red-500/30 transform active:scale-98">
+                            <IconStop className="w-3 h-3" />
                             End Stream
                         </button>
                     </div>

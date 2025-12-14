@@ -65,8 +65,8 @@ const Profile = () => {
                     </div>
                     
                     {/* Start Streaming Link */}
-                    <Link to="/livestream" className="w-100 flex items-center justify-center gap-2 p-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 rounded-2xl font-bold text-lg text-white shadow-xl hover:shadow-blue-500/40 transform active:scale-98">
-                        <IconPlay className="w-6 h-6" />
+                    <Link to="/livestream" className="max-w-[200px] max-h-[200px]  flex-col  flex items-center justify-center gap-2 p-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 rounded-2xl font-bold text-lg text-white shadow-xl hover:shadow-blue-500/40 transform active:scale-98 md:w-full">
+                        <IconPlay className="w-3 h-3" />
                         Start Streaming
                     </Link>
                 </div>

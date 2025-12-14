@@ -20,6 +20,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                     <nav className="flex flex-col space-y-3">
                         <Link to="/" onClick={onClose} className="p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-base font-semibold">Home</Link>
                         <Link to="/profile" onClick={onClose} className="p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-base font-semibold">Profilo</Link>
+                        <Link to="/livestream" onClick={onClose} className="p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-base font-semibold">Live</Link>
                     </nav>
                 </div>
             </aside>
