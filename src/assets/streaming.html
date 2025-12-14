@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone per Amico - Streaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --steel-blue-50: #f2f7fd;
+            --steel-blue-100: #e4edfa;
+            --steel-blue-600: #1a62af;
+            --steel-blue-700: #164e8e;
+            --steel-blue-800: #164376;
+            --steel-blue-900: #183a62;
+            --steel-blue-950: #102441;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .iphone-mockup {
+            width: 400px;
+            height: 860px;
+            background: #1a1a1a;
+            border-radius: 60px;
+            padding: 14px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .iphone-notch {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 35px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--steel-blue-50) 0%, var(--steel-blue-100) 100%);
+            border-radius: 50px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            height: 50px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            padding-top: 10px;
+            color: var(--steel-blue-950);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .streaming-header {
+            background: var(--steel-blue-800);
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .streaming-header h1 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .nav-back {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 1.25rem;
+            text-decoration: none;
+        }
+
+        .icon-lg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .icon-xl {
+            width: 48px;
+            height: 48px;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .streaming-container {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+
+        .stream-container {
+            position: relative;
+            background: black;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .stream-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--steel-blue-800) 0%, var(--steel-blue-950) 100%);
+            color: white;
+            gap: 0.5rem;
+        }
+
+        .stream-watermark {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.6875rem;
+            font-family: monospace;
+        }
+
+        .audio-banner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #dc2626;
+            color: white;
+            padding: 0.625rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pulse {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.625rem;
+        }
+
+        .info-item {
+            text-align: center;
+            background: white;
+            padding: 0.75rem 0.5rem;
+            border-radius: 15px;
+        }
+
+        .info-label {
+            font-size: 0.6875rem;
+            color: var(--steel-blue-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--steel-blue-900);
+        }
+
+        .viewers-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+        }
+
+        .viewers-card h4 {
+            font-size: 0.875rem;
+            color: var(--steel-blue-700);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .viewer-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .viewer-name {
+            font-size: 0.8125rem;
+            color: var(--steel-blue-900);
+            font-weight: 500;
+        }
+
+        .viewer-status {
+            font-size: 0.6875rem;
+            color: #059669;
+            padding: 0.25rem 0.625rem;
+            background: #d1fae5;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-danger {
+            padding: 1rem 1.5rem;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .btn-danger:active {
+            transform: scale(0.98);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            font-size: 1.25rem;
+            color: var(--steel-blue-900);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 0.875rem;
+            color: var(--steel-blue-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-modal {
+            flex: 1;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-modal-cancel {
+            background: var(--steel-blue-100);
+            color: var(--steel-blue-700);
+        }
+
+        .btn-modal-confirm {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-modal-ok {
+            background: var(--steel-blue-600);
+            color: white;
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #d1fae5;
+            color: #059669;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .location-banner {
+            background: #d1fae5;
+            border-radius: 15px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #059669;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="iphone-mockup">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>100%</span>
+            </div>
+
+            <div class="streaming-header">
+                <a href="profile.html" class="nav-back">
+                    <svg class="icon-lg">
+                        <use href="#icon-arrow-back"/>
+                    </svg>
+                </a>
+                <h1>Live Streaming</h1>
+            </div>
+
+            <div class="streaming-container">
+                <svg style="display: none;">
+                    <defs>
+                        <symbol id="icon-video" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M17 10.5V7C17 6.45 16.55 6 16 6H4C3.45 6 3 6.45 3 7V17C3 17.55 3.45 18 4 18H16C16.55 18 17 17.55 17 17V13.5L21 17.5V6.5L17 10.5Z"/>
+                        </symbol>
+                        <symbol id="icon-microphone" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 2C10.34 2 9 3.34 9 5V12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12V5C15 3.34 13.66 2 12 2M19 12C19 15.53 16.39 18.44 13 18.93V22H11V18.93C7.61 18.44 5 15.53 5 12H7C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12H19Z"/>
+                        </symbol>
+                        <symbol id="icon-users" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z"/>
+                        </symbol>
+                        <symbol id="icon-stop" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M18 18H6V6H18V18Z"/>
+                        </symbol>
+                        <symbol id="icon-arrow-back" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z"/>
+                        </symbol>
+                        <symbol id="icon-location" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2M12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5Z"/>
+                        </symbol>
+                    </defs>
+                </svg>
+
+                <div class="stream-container">
+                    <div class="stream-placeholder">
+                        <svg class="icon-xl"><use href="#icon-video"/></svg>
+                        <span>Live Attivo</span>
+                    </div>
+                    <div class="stream-watermark">DPA-7F3A</div>
+                    <div class="audio-banner">
+                        <div class="pulse"></div>
+                        <svg class="icon"><use href="#icon-microphone"/></svg>
+                        <span>AUDIO ATTIVO</span>
+                    </div>
+                </div>
+
+                <div class="location-banner">
+                    <svg class="icon"><use href="#icon-location"/></svg>
+                    <span>Condivisione posizione attiva</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Altitudine</div>
+                        <div class="info-value">45 m</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Velocità</div>
+                        <div class="info-value">12 km/h</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Batteria</div>
+                        <div class="info-value">78%</div>
+                    </div>
+                </div>
+
+                <div class="viewers-card">
+                    <h4>
+                        <svg class="icon"><use href="#icon-users"/></svg>
+                        Viewers (3)
+                    </h4>
+                    <div class="viewer-item">
+                        <span class="viewer-name">Mamma</span>
+                        <span class="viewer-status">Online</span>
+                    </div>
+                    <div class="viewer-item">
+                        <span class="viewer-name">Sara</span>
+                        <span class="viewer-status">Online</span>
+                    </div>
+                    <div class="viewer-item">
+                        <span class="viewer-name">Paolo</span>
+                        <span class="viewer-status">Online</span>
+                    </div>
+                </div>
+
+                <button class="btn-danger" onclick="showStopModal()">
+                    <svg class="icon-lg"><use href="#icon-stop"/></svg>
+                    Termina Streaming
+                </button>
+            </div>
+
+            <!-- Confirm Modal -->
+            <div id="confirmModal" class="modal">
+                <div class="modal-content">
+                    <h3>Terminare lo streaming?</h3>
+                    <p>Lo streaming verrà interrotto per tutti i viewer del tuo Trusted Circle.</p>
+                    <div class="modal-buttons">
+                        <button class="btn-modal btn-modal-cancel" onclick="closeConfirmModal()">Annulla</button>
+                        <button class="btn-modal btn-modal-confirm" onclick="confirmStop()">Termina</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div id="successModal" class="modal">
+                <div class="modal-content">
+                    <div class="success-icon">✓</div>
+                    <h3>Streaming Terminato</h3>
+                    <p>✓ Metadata salvati (30 giorni)<br>✓ Zero storage video/audio</p>
+                    <button class="btn-modal btn-modal-ok" onclick="goToProfile()" style="width: 100%;">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showStopModal() {
+            document.getElementById('confirmModal').classList.add('active');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+        }
+
+        function confirmStop() {
+            closeConfirmModal();
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function goToProfile() {
+            window.location.href = 'streaming-summary.html';
+        }
+    </script>
+</body>
+</html>

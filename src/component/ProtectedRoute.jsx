@@ -5,6 +5,14 @@ import { useAuth } from '../context/user.context';
 const ProtectedRoute = ({ children }) => {
     const { state } = useAuth();
 
+    if (state.loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+            </div>
+        );
+    }
+
     if (!state.isAuthenticated) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them

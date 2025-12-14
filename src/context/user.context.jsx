@@ -5,7 +5,7 @@ const authInitialState =
 {
     user:null,
     isAuthenticated:false,
-    loading:false,
+    loading:true,
     error:null,
 }
 const authReducer = (state,action)=>{
@@ -15,10 +15,12 @@ const authReducer = (state,action)=>{
                 ...state,
                 user:action.payload,
                 isAuthenticated:true,
+                loading: false,
             }
         case "LOGOUT":
             return{
-                ...authInitialState
+                ...authInitialState,
+                loading: false,
             }
         case "AUTH_CHECK":
             //console.log('Auth Check User:', action.payload.user);
@@ -60,28 +62,32 @@ export const AuthProvider = ({children})=>{
         if(!res){
             dispatch({type:"ERROR",payload:"No user logged in"});
         }else{
-            ///console.log('Auth Check User:', res.data);
+            ///console.log('Auth Check User:', res);
             dispatch({type:"AUTH_CHECK",payload:{user:res,check:true}});
         }
         
     }
     const Login =  (formData) => {
-        const res = localStorage.getItem(formData.name) ? JSON.parse(localStorage.getItem(formData.name)) : null;
-    if(!res){
-        return { error: "User not found. Please sign up." };
-    };
-    if(res.password !== formData.password){
-        return { error: "Invalid credentials. Please try again." };
+        const res = localStorage.getItem(formData.email) ? JSON.parse(localStorage.getItem(formData.email)) : null;
+        if(!res){
+            return { error: "Utente non trovato. Per favore registrati." };
+        };
+        if(res.password !== formData.password){
+            return { error: "I credenziali non validi  ." };
+        }
+       dispatch({type:"LOGIN_SUCCESS",payload:res});
+       localStorage.setItem('userData', JSON.stringify(res));
+       return { data: res };
     }
-    return { data: res };
-}
     const Register = (formData) => {
                 
-        const res = localStorage.getItem(formData.name) ? JSON.parse(localStorage.getItem(formData.name)) : null;
-        if(!res){
-            return { error: "User already exists. Please sign in." };
+        const res = localStorage.getItem(formData.email) ? JSON.parse(localStorage.getItem(formData.email)) : null;
+        if(res){
+            return { error: "Utente esistente. Login." };
         }
-        localStorage.setItem(formData.name, JSON.stringify(formData));
+        localStorage.setItem(formData.email, JSON.stringify(formData));
+        localStorage.setItem('userData', JSON.stringify(formData));
+        dispatch({type:"LOGIN_SUCCESS",payload:formData});
         return { data: formData };
     }
     return(

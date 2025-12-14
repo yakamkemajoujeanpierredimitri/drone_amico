@@ -5,6 +5,7 @@ import SignIn from './pages/signin';
 import Profile from './pages/Profile';
 import LiveStream from './pages/LiveStream';
 import ProtectedRoute from './component/ProtectedRoute';
+import Layout from './component/Layout';
 
 const App = () => {
   return (
@@ -13,16 +14,19 @@ const App = () => {
         <Route path="/" element={<Go />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        } />
-        <Route path="/d" element={
-          <ProtectedRoute>
-            <LiveStream />
-          </ProtectedRoute>
-        } />
+        
+        <Route element={<Layout />}>
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/livestream" element={
+            <ProtectedRoute>
+              <LiveStream />
+            </ProtectedRoute>
+          } />
+        </Route>
       </Routes>
     </Router>
   );

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --steel-blue-50: #f2f7fd;
+            --steel-blue-100: #e4edfa;
+            --steel-blue-600: #1a62af;
+            --steel-blue-700: #164e8e;
+            --steel-blue-800: #164376;
+            --steel-blue-900: #183a62;
+            --steel-blue-950: #102441;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .iphone-mockup {
+            width: 400px;
+            height: 860px;
+            background: #1a1a1a;
+            border-radius: 60px;
+            padding: 14px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .iphone-notch {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 35px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--steel-blue-50) 0%, var(--steel-blue-100) 100%);
+            border-radius: 50px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            height: 50px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            padding-top: 10px;
+            color: var(--steel-blue-950);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        header {
+            background: var(--steel-blue-800);
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-left: 2.5rem;
+        }
+
+        .nav-back {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 1.25rem;
+            text-decoration: none;
+        }
+
+        .icon-lg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .legal-section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.125rem;
+            color: var(--steel-blue-900);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .legal-section p {
+            font-size: 0.875rem;
+            color: var(--steel-blue-700);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-section ul {
+            margin-left: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-section li {
+            font-size: 0.875rem;
+            color: var(--steel-blue-700);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: var(--steel-blue-50);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--steel-blue-600);
+            margin-top: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="iphone-mockup">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>100%</span>
+            </div>
+
+            <header>
+                <a href="login.html" class="nav-back">
+                    <svg class="icon-lg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z"/>
+                    </svg>
+                </a>
+                <h1>Privacy Policy</h1>
+            </header>
+
+            <div class="content">
+                <div class="legal-section">
+                    <h2>GDPR - Contitolarità</h2>
+                    <p>Contitolarità tra startup e utente per il trattamento connesso a:</p>
+                    <ul>
+                        <li>Autenticazione</li>
+                        <li>Gestione trusted circle</li>
+                        <li>Relay effimero</li>
+                        <li>Log tecnici minimi</li>
+                        <li>Sicurezza</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Base Giuridica</h2>
+                    <p><strong>Legittimo interesse</strong> per condivisione real-time a fini di "safety reassurance".</p>
+                    <div class="highlight">
+                        <p><strong>DPIA sempre attiva</strong> - aggiornata a ogni change sostanziale.</p>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Zero Storage</h2>
+                    <p>Nessun video o audio registrato sul portale.</p>
+                    <p><strong>Log tecnici minimi conservati per 30 giorni:</strong></p>
+                    <ul>
+                        <li>Account e contatti trusted circle</li>
+                        <li>Start/stop sessione</li>
+                        <li>Esito connessione</li>
+                        <li>Error codes</li>
+                        <li>IP e timestamp</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Misure di Sicurezza</h2>
+                    <ul>
+                        <li>Autenticazione forte</li>
+                        <li>Sessioni a scadenza</li>
+                        <li>Controllo accessi</li>
+                        <li>Rate limiting</li>
+                        <li>Monitoring anomalie</li>
+                        <li>Revoca immediata contatti</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Diritti degli Interessati</h2>
+                    <p>Hai diritto di:</p>
+                    <ul>
+                        <li>Accesso ai dati</li>
+                        <li>Rettifica</li>
+                        <li>Cancellazione</li>
+                        <li>Portabilità</li>
+                        <li>Opposizione</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2>Trusted Circle</h2>
+                    <p>Solo inviti manuali - <strong>niente import rubrica</strong>.</p>
+                    <p>Accesso solo con account autenticato - <strong>niente link pubblici</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

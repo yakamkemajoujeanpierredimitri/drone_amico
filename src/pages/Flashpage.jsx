@@ -84,7 +84,7 @@ const HomePage = () => {
         {/* We use absolute positioning here relative to this specific container */}
         <div className="absolute top-6 right-6 flex flex-col items-center gap-3">
              {/* Optional name label next to avatar */} 
-             <NavLink to={state.user ? "/dashboard" : "/login"}>
+             <NavLink to={state.user ? "/profile" : "/login"}>
              <img 
                 src={"https://i.pravatar.cc/150?img=3"} 
                 alt="User Avatar" 
@@ -139,7 +139,7 @@ export default function Go() {
          When Splash fades out (opacity-0), the Home Page is revealed underneath.
       */}
       
-      {isLoading && <SplashScreen onComplete={() => setIsLoading(false)} />}
+      {/*isLoading && <SplashScreen onComplete={() => setIsLoading(false)} />*/}
       
       <HomePage />
     </>
