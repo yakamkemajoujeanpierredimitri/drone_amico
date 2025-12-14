@@ -48,3 +48,8 @@ export const IconArrowBack = () => (
         <path fill="currentColor" d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z"/>
     </svg>
 );
+export const IconUser = () => (
+    <svg className="icon-lg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/>
+    </svg>
+);

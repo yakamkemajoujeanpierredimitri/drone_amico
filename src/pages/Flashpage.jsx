@@ -3,6 +3,7 @@ import splashImg from '../assets/splash.png';
 import { useAuth } from '../context/user.context';
 import { NavLink, useNavigation } from 'react-router-dom';
 import videoBG from '../assets/girl_moving.mp4'
+import { IconUser } from '../component/Icons';
 
 const SplashScreen = ({ onComplete }) => {
   const [isFading, setIsFading] = useState(false);
@@ -84,18 +85,15 @@ const HomePage = () => {
         {/* We use absolute positioning here relative to this specific container */}
         <div className="absolute top-6 right-6 flex flex-col items-center gap-3">
              {/* Optional name label next to avatar */} 
-             <NavLink to={state.user ? "/profile" : "/login"}>
-             <img 
-                src={"https://i.pravatar.cc/150?img=3"} 
-                alt="User Avatar" 
-                // Rounded full makes it a circle.
-                // Border adds a nice separation from the video.
-                // cursor-pointer suggests it's clickable (e.g., to go to settings)
-                className="w-20 h-20 text-white rounded-full border-2 border-secondary/80 cursor-pointer hover:border-primary transition"
-               
-            /></NavLink>
+             <NavLink to={state.user ? "/profile" : "/login"} className="rounded-full overflow-hidden w-16 h-16 bg-blue-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg hover:shadow-xl transition-shadow">
+             {
+              state.user ? <IconUser/>: (  <div className="w-24 h-24 bg-blue-500 text-white flex items-center justify-center rounded-full text-4xl font-bold flex-shrink-0 mx-auto md:mx-0">
+                            {state.user?.name ? state.user.name.charAt(0).toUpperCase() : 'G'} 
+                        </div>)
+             }
+          </NavLink>
             <span className=" text-white hidden md:block font-medium text-sm tracking-wider opacity-90">
-                {state.user ? state.user.name : "Accedi"}
+                {state.user ? state.user?.name ||(state.user?.name || "Tu") : "Accedi"}
             </span>
             {/* The Avatar Image */}
            
@@ -116,7 +114,7 @@ const HomePage = () => {
           </p>
 
           <div className="flex gap-4 justify-center">
-            <NavLink to={state.user ? "/dashboard" : "/login"}>
+            <NavLink to={state.user ? "/livestream" : "/login"}>
              <button className="px-8 text-white py-3 bg-primary hover:bg-blue-600 text-secondary cursor-pointer rounded-full font-semibold transition transform hover:scale-105 active:scale-95">
                Avvia
              </button>

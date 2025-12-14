@@ -74,7 +74,7 @@ const SignUp = () => {
             dispatch({ type: "ERROR", payload: res.error });
         } else {
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-            navigate('/dashboard');
+            navigate('/livestream');
         }
         setLoading(false);
     }}
